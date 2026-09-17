@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourav Variety Store</title>
+<style>
+:root{--green:#087f3f;--dark:#123326;--light:#f5faf7;--orange:#ff9f1c}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f7f8f7;color:#173126}
+a{text-decoration:none;color:inherit}.top{background:var(--dark);color:white;text-align:center;padding:8px;font-size:13px}
+header{background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #00000012}
+.nav{max-width:1200px;margin:auto;display:flex;align-items:center;gap:22px;padding:15px 18px}
+.logo{font-size:23px;font-weight:800;color:var(--green);white-space:nowrap}.logo span{color:#f39a17}
+.search{flex:1;display:flex;border:1px solid #dce5df;border-radius:25px;overflow:hidden}.search input{flex:1;border:0;padding:12px 16px;outline:0}.search button{border:0;background:var(--green);color:white;padding:0 20px}
+.navbtn{border:0;background:white;font-size:14px;cursor:pointer}.cart{background:var(--green);color:white;border-radius:22px;padding:10px 15px}
+.wrap{max-width:1200px;margin:auto;padding:24px 18px}
+.hero{background:linear-gradient(120deg,#e4f6e9,#fff3d9);border-radius:20px;padding:45px 42px;display:flex;justify-content:space-between;align-items:center;min-height:300px}
+.hero h1{font-size:44px;margin:0 0 10px}.hero p{font-size:18px;color:#53665c}.cta{display:inline-block;background:var(--green);color:white;padding:13px 22px;border-radius:25px;margin-top:10px;font-weight:bold}.hero-art{font-size:95px}
+h2{margin:34px 0 16px}.cats{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.cat{background:white;border-radius:15px;padding:18px 8px;text-align:center;box-shadow:0 2px 8px #00000009;cursor:pointer}.cat .emoji{font-size:35px;display:block;margin-bottom:8px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:white;border-radius:15px;padding:15px;box-shadow:0 2px 10px #0000000b;position:relative}.pic{height:150px;border-radius:12px;background:#f3f7f4;display:flex;align-items:center;justify-content:center;font-size:70px}.badge{position:absolute;top:24px;left:24px;background:#e64b35;color:white;border-radius:12px;padding:5px 8px;font-size:11px}.card h3{font-size:16px;margin:12px 0 5px}.size{color:#75827c;font-size:12px}.price{font-size:18px;font-weight:bold;color:var(--green);margin:9px 0}.old{text-decoration:line-through;color:#999;font-size:12px;margin-left:5px}.add{width:100%;border:1px solid var(--green);background:white;color:var(--green);border-radius:20px;padding:9px;font-weight:bold;cursor:pointer}.add:hover{background:var(--green);color:white}
+.offer{margin-top:30px;background:var(--dark);color:white;border-radius:18px;padding:25px 30px;display:flex;justify-content:space-between;align-items:center}.offer button{background:var(--orange);border:0;padding:11px 20px;border-radius:20px;font-weight:bold}
+footer{margin-top:45px;background:#10251b;color:#dce8e1;padding:35px 18px}.foot{max-width:1200px;margin:auto;display:flex;justify-content:space-between;gap:30px}.foot h3{color:white}.cartpanel{position:fixed;right:18px;bottom:18px;background:white;width:320px;border-radius:15px;box-shadow:0 8px 35px #0003;padding:18px;display:none;z-index:10}.cartpanel.show{display:block}.close{float:right;border:0;background:none;font-size:20px}.checkout{width:100%;background:var(--green);color:white;border:0;padding:12px;border-radius:20px;margin-top:10px}
+@media(max-width:800px){.nav{flex-wrap:wrap}.search{order:3;flex-basis:100%}.cats{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:32px}.hero-art{font-size:65px}.foot{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="top">🚚 Fast delivery • Cash on Delivery available • Welcome to Sourav Variety Store</div>
+<header><div class="nav">
+<div class="logo">SOURAV <span>VARIETY STORE</span></div>
+<div class="search"><input id="search" placeholder="Search for products..."><button onclick="searchProducts()">Search</button></div>
+<button class="navbtn">♡ Wishlist</button><button class="cart" onclick="toggleCart()">🛒 Cart <span id="count">0</span></button>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+<div><div style="color:#087f3f;font-weight:bold">YOUR EVERYDAY SHOP</div><h1>Everything you need,<br>in one place.</h1><p>Groceries, beverages, snacks, household essentials and more.</p><a class="cta" href="#products">Shop Now →</a></div>
+<div class="hero-art">🛍️🥦</div>
+</section>
+
+<h2>Shop by Category</h2>
+<section class="cats">
+<div class="cat" onclick="filter('Grocery')"><span class="emoji">🍚</span>Grocery</div>
+<div class="cat" onclick="filter('Fresh')"><span class="emoji">🥬</span>Fresh Food</div>
+<div class="cat" onclick="filter('Beverage')"><span class="emoji">🥤</span>Beverages</div>
+<div class="cat" onclick="filter('Snack')"><span class="emoji">🍪</span>Snacks</div>
+<div class="cat" onclick="filter('Tea')"><span class="emoji">☕</span>Tea & Coffee</div>
+<div class="cat" onclick="filter('Home')"><span class="emoji">🧹</span>Home Care</div>
+<div class="cat" onclick="filter('Personal')"><span class="emoji">🧴</span>Personal Care</div>
+</section>
+
+<div class="offer"><div><strong>🔥 Special Offers</strong><br>Save more on selected everyday essentials.</div><button onclick="document.getElementById('products').scrollIntoView()">View Products</button></div>
+
+<h2 id="products">Popular Products</h2>
+<section class="products" id="grid"></section>
+</main>
+
+<div class="cartpanel" id="cartpanel"><button class="close" onclick="toggleCart()">×</button><h3>Your Cart</h3><div id="cartitems">Your cart is empty.</div><hr><strong>Total: ৳<span id="total">0</span></strong><button class="checkout">Proceed to Checkout</button></div>
+
+<footer><div class="foot"><div><h3>SOURAV VARIETY STORE</h3><p>Your everyday shopping partner.</p></div><div><h3>Customer Service</h3><p>Delivery • Returns • Contact Us</p></div><div><h3>Contact</h3><p>Dhaka, Bangladesh<br>Cash on Delivery available</p></div></div></footer>
+
+<script>
+const products=[
+{name:"Premium Miniket Rice",size:"5 kg",price:520,cat:"Grocery",emoji:"🍚"},
+{name:"Fresh Bananas",size:"1 dozen",price:120,cat:"Fresh",emoji:"🍌"},
+{name:"Mango Juice",size:"1 litre",price:180,old:210,cat:"Beverage",emoji:"🧃",sale:1},
+{name:"Potato Chips",size:"100 g",price:60,cat:"Snack",emoji:"🥔"},
+{name:"Premium Black Tea",size:"200 g",price:165,cat:"Tea",emoji:"☕"},
+{name:"Instant Coffee",size:"100 g",price:290,cat:"Tea",emoji:"☕"},
+{name:"Dishwashing Liquid",size:"500 ml",price:145,cat:"Home",emoji:"🧽"},
+{name:"Shampoo",size:"340 ml",price:320,cat:"Personal",emoji:"🧴"}
+];
+let cart=[];
+function render(list=products){document.getElementById('grid').innerHTML=list.map((p,i)=>`
+<div class="card"><div class="pic">${p.emoji}</div>${p.sale?'<span class="badge">SALE</span>':''}
+<h3>${p.name}</h3><div class="size">${p.size}</div><div class="price">৳${p.price} ${p.old?'<span class="old">৳'+p.old+'</span>':''}</div>
+<button class="add" onclick="add(${products.indexOf(p)})">Add to Cart</button></div>`).join('')}
+function add(i){cart.push(products[i]);document.getElementById('count').textContent=cart.length;updateCart()}
+function updateCart(){document.getElementById('cartitems').innerHTML=cart.length?cart.map((p,i)=>`<div style="padding:7px 0">${p.name} — ৳${p.price} <button onclick="removeItem(${i})">×</button></div>`).join(''):'Your cart is empty.';document.getElementById('total').textContent=cart.reduce((s,p)=>s+p.price,0)}
+function removeItem(i){cart.splice(i,1);document.getElementById('count').textContent=cart.length;updateCart()}
+function toggleCart(){document.getElementById('cartpanel').classList.toggle('show')}
+function filter(c){render(products.filter(p=>p.cat===c));document.getElementById('products').scrollIntoView({behavior:'smooth'})}
+function searchProducts(){let q=document.getElementById('search').value.toLowerCase();render(products.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)))}
+render();
+</script>
+</body>
+</html>
